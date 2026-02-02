@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>兩岸用語對照｜台灣 ↔ 大陸</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="topline">
+        <h1>兩岸用語對照（台灣 ↔ 大陸）</h1>
+        <div class="top-actions">
+          <button id="refresh" type="button" class="btn">強制刷新</button>
+          <a id="submit" class="btn btn-accent" href="#">我要提交新詞條</a>
+        </div>
+      </div>
+
+      <p class="sub">
+        只收「差異大、容易卡住/誤會」的詞。適用：旅遊、租屋、消費、交通、辦事、外賣、快遞等。
+      </p>
+
+      <div class="note-box">
+        <div class="note-title" id="noteTitle">站長備註</div>
+        <div class="note-body" id="noteBody"></div>
+        <div class="note-meta">
+          <span>版本：<span id="ver"></span></span>
+          <span class="dot">•</span>
+          <span>聯絡：<a href="mailto:lbudd655@gmail.com">lbudd655@gmail.com</a></span>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input id="q" type="search" placeholder="用繁體搜尋：例如 公寓／外帶／到付／驛站／發票／抬頭…" autocomplete="off" />
+        <select id="cat">
+          <option value="all">全部分類</option>
+        </select>
+        <select id="lvl">
+          <option value="all">全部誤會等級</option>
+          <option value="high">高（很容易踩坑）</option>
+          <option value="mid">中（常見誤解）</option>
+          <option value="low">低（輕微差異）</option>
+        </select>
+        <button id="clear" type="button" class="btn">清空</button>
+      </div>
+
+      <div class="meta">
+        <span id="count">0 條</span>
+        <span class="dot">•</span>
+        <span class="muted">（提示：結果會自動按「高→中→低」排序）</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:14%">分類</th>
+            <th style="width:12%">誤會等級</th>
+            <th style="width:18%">台灣常用</th>
+            <th style="width:18%">大陸常用</th>
+            <th>差異說明（重點：哪裡會卡住/誤會）</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <footer class="footer">
+      <p>後續會加入：FAQ、表單投稿、以及「按城市/場景」篩選。</p>
+    </footer>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
