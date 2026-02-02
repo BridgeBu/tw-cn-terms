@@ -32,23 +32,23 @@
   }
 
   function updateVisitCount() {
-  const el = document.getElementById("visit-count");
-  if (!el) return;
+    const el = document.getElementById("visit-count");
+    if (!el) return;
 
-  const namespace = "bridgebu";
-  const key = "tw-cn-terms";
+    const namespace = "bridgebu";
+    const key = "tw-cn-terms";
 
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-    .then(res => res.json())
-    .then(data => {
-      if (typeof data.value === "number") {
-        el.textContent = `已有 ${data.value} 次访问`;
-      }
-    })
-    .catch(() => {
-      el.textContent = "已有 -- 次访问";
-    });
-}
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      .then(res => res.json())
+      .then(data => {
+        if (typeof data.value === "number") {
+          el.textContent = `已有 ${data.value} 次訪問`;
+        }
+      })
+      .catch(() => {
+        el.textContent = "已有 -- 次訪問";
+      });
+  }
 
   function uniq(arr) {
     return [...new Set(arr)].filter(Boolean);
