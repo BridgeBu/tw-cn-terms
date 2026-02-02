@@ -32,23 +32,44 @@
   }
 
   function updateVisitCount() {
-    const el = document.getElementById("visit-count");
-    if (!el) return;
+  const el = document.getElementById("visit-count");
+  if (!el) return;
 
-    const namespace = "bridgebu";
-    const key = "tw-cn-terms";
+  // 你自己的唯一标识（有 namespace 的写法）
+  const namespace = "bridgebu-gh-pages";
+  const key = "tw-cn-terms-main";
 
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(res => res.json())
-      .then(data => {
-        if (typeof data.value === "number") {
-          el.textContent = `已有 ${data.value} 次訪問`;
-        }
-      })
-      .catch(() => {
-        el.textContent = "已有 -- 次訪問";
-      });
-  }
+  // 主服务（你现在网络里会被断开）
+  const primaryUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+  // 备用服务：没有 namespace 概念，所以拼成一个唯一 key
+  // 文档：/api/v1/hit/your_key 返回 JSON，包含 value  [oai_citation:2‡countapi.mileshilliard.com](https://countapi.mileshilliard.com/)
+  const fallbackKey = `${namespace}__${key}`;
+  const fallbackUrl = `https://countapi.mileshilliard.com/api/v1/hit/${encodeURIComponent(fallbackKey)}`;
+
+  const render = (v) => {
+    const n = Number(v);
+    el.textContent = Number.isFinite(n) ? `已有 ${n} 次訪問` : "已有 -- 次訪問";
+  };
+
+  fetch(primaryUrl)
+    .then((r) => r.json())
+    .then((data) => {
+      if (data && typeof data.value !== "undefined") render(data.value);
+      else throw new Error("primary invalid response");
+    })
+    .catch(() => {
+      fetch(fallbackUrl)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && typeof data.value !== "undefined") render(data.value);
+          else el.textContent = "已有 -- 次訪問";
+        })
+        .catch(() => {
+          el.textContent = "已有 -- 次訪問";
+        });
+    });
+}
 
   function uniq(arr) {
     return [...new Set(arr)].filter(Boolean);
