@@ -31,6 +31,25 @@
     return out;
   }
 
+  function updateVisitCount() {
+  const el = document.getElementById("visit-count");
+  if (!el) return;
+
+  const namespace = "bridgebu";
+  const key = "tw-cn-terms";
+
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      if (typeof data.value === "number") {
+        el.textContent = `已有 ${data.value} 次访问`;
+      }
+    })
+    .catch(() => {
+      el.textContent = "已有 -- 次访问";
+    });
+}
+
   function uniq(arr) {
     return [...new Set(arr)].filter(Boolean);
   }
@@ -156,6 +175,7 @@
       apply();
       qEl.focus();
     });
+    updateVisitCount();
   }
 
   init();

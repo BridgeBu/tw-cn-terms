@@ -150,4 +150,14 @@ tbody tr:hover{ background: rgba(122,162,255,.06); }
 .lvl-mid{ color: var(--mid); border-color: rgba(255,209,102,.35); }
 .lvl-low{ color: var(--low); border-color: rgba(123,216,143,.35); }
 
+.visit-box {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.visit-box strong {
+  color: var(--accent);
+  font-weight: 700;
+}
 .footer{ margin: 18px 0 34px; color: var(--muted); font-size: 13px; }
+
